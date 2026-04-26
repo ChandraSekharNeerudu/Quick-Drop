@@ -128,7 +128,7 @@ text-decoration:underline;
 <div class="input-group-prepend">
 <span class="input-group-text"><i class="fa fa-envelope"></i></span>
 </div>
-<input type="email" name="email" class="form-control" placeholder="Email">
+<input type="text" name="email" class="form-control" placeholder="Email">
 </div>
 </div>
 

@@ -118,14 +118,14 @@ text-decoration:underline;
 <div class="mb-3">
 <div class="input-group">
 <span class="input-group-text"><i class="fa fa-user"></i></span>
-<input type="text" name="username" class="form-control" placeholder="Username">
+<input type="text" name="username" class="form-control" placeholder="Username" required>
 </div>
 </div>
 
 <div class="mb-3">
 <div class="input-group">
 <span class="input-group-text"><i class="fa fa-lock"></i></span>
-<input type="password" name="password" class="form-control" placeholder="Password">
+<input type="password" name="password" class="form-control" placeholder="Password" required>
 </div>
 </div>
 <div class="mb-3 text-right">

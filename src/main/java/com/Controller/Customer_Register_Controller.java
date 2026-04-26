@@ -41,7 +41,7 @@ public class Customer_Register_Controller extends HttpServlet {
 		customer.setUserId(userid);
 		customer.setCutomerName(request.getParameter("customername"));
 		customer.setMobile(request.getParameter("mobile"));
-		customer.setMail(request.getParameter("e-mail"));
+		customer.setMail(request.getParameter("email"));
 		customer.setAddress(request.getParameter("address"));
 		CustomerService customerserv=new CustomerService();
 		boolean status=customerserv.register(customer);
