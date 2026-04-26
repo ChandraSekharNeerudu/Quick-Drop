@@ -1,0 +1,22 @@
+@charset "UTF-8";
+.linear {
+    background: linear-gradient(to left,rgb(23,43,12),rgb(123,243,26),hsl(33, 95%, 54%));
+    padding: 15px 0;
+    width: 100vw; /* Force width to match the total screen width */
+    position: relative;
+    left: 0;
+    margin: 0;
+   
+}  
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden; /* This is key to prevent horizontal gaps */
+}
+/* Remove default padding from the footer */
+.footer {
+    width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}

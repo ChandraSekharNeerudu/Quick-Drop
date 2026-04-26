@@ -14,19 +14,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
-       .linear{
-        background: linear-gradient(to left,rgb(23,43,12),rgb(123,243,26),hsl(33, 95%, 54%));
-        padding: 5px 0;
-        } 
+   
+
+.linear {
+    background: linear-gradient(to left,rgb(23,43,12),rgb(123,243,26),hsl(33, 95%, 54%));
+    padding: 15px 0;
+    width: 100vw; /* Force width to match the total screen width */
+    position: relative;
+    left: 0;
+    margin: 0;
+   
+}  
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden; /* This is key to prevent horizontal gaps */
+}
+/* Remove default padding from the footer */
+.footer {
+    width: 100vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+         
         .h1{
          color: rgb(55, 0, 255);
         }
         .hey{
             overflow:hidden;
         }
-        body {
-    padding-top: 75px; /* Standard height for a fixed navbar + small gap */
-    }
     .btn-custom-orange {
         color: rgb(236, 126, 16); 
         border: 2px solid rgb(236, 126, 16);
@@ -65,13 +82,11 @@
 .carousel-control-next-icon {
     filter: invert(100%);
 }
-
-     
-             
+        
     </style>
     </head>
-    <body>    
-    <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm fixed-top">
+    <body>   
+    <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm sticky-top">
     <div class="container-fluid">
          <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mynav">
             <span class="navbar-toggler-icon"></span>
@@ -97,17 +112,13 @@
         
         <a href="./login.jsp"><input type="button" class="btn btn-success me-4" value="Login"> </a>
         <a href="#" class="nav-link text-dark text-center">
-            <i class="fas fa-user-circle fa-2x d-block"></i> <span>Profile</span>
+            <i class="fas fa-user-circle fa-2x d-block"></i>
+             <span>Profile</span>
         </a>
-    </div>
-    </nav>
-
-
-
-
-
+   </div>
+</nav>  
     
-    <div >
+    <div class="w-100 p-0 m-0">
             <header class="linear">
             <h1 class="text-center">Welcome to the Quick-Drop Worlds Top Shipping System...!!!</h1>
             </header>
@@ -181,26 +192,6 @@
 
 
 
-    <footer class="bg-dark text-white pt-4 pb-4  pl-3 pr-3 mt-5">
-        <div class=" container text-center text-md-start ">
-            <div class="row">
-        <div class="col-md-5 mt-3">
-            <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Quick-Drop</h5>
-                <p>Your one-stop destination for the Quick and Safe delivery.</p>
-        </div>
-        <div class="col-md-3 mt-3">
-            <h5 class="text-warning text-uppercase mb-4 font-weight-bold">policies</h5>
-            <p><a href="#" class="text-white" style="text-decoration: none;">Returns</a></p>
-            <p><a href="#" class="text-white" style="text-decoration: none;">Shipping</a></p>
-        </div>
-        <div class="col-md-4 mt-3">
-            <h5 class="text-warning text-uppercase mb-4 font-weight-bold">Contact</h5>
-           <p><i class="bi bi-house-door me-4"></i> Hyderabad,india</p>
-           <p><i class="bi bi-envelope me-4"></i> Support@Quickdrop.com</p>
-        </div>
-        </div>
-        </div>
-        
-    </footer> 
+<%@ include file="includes/footer.jsp" %>    
 </body>
 </html>

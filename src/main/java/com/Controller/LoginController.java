@@ -85,7 +85,7 @@ public class LoginController extends HttpServlet {
 		else
 		{
 			request.setAttribute("loginstatus", "Invalid Credentials,Username or password is wrong");
-			System.out.println("Invalid Credentials,Username or password is wrong");
+			//System.out.println("Invalid Credentials,Username or password is wrong");
 			response.sendRedirect("login.jsp?error=1");
 //			RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
 //			rd.forward(request, response);
