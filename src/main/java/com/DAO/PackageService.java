@@ -52,10 +52,12 @@ public class PackageService implements Package_interface {
 		return false;
 	}
 	@Override
-	public List<Package> findAll() {
+	public List<Package> findAll(int offset,int recordsPerPage) {
 		List<Package> list=new ArrayList();
 		try(Connection con=JdbcConnection.getConnection()){
-			PreparedStatement ps=con.prepareStatement("select * from package");
+			PreparedStatement ps=con.prepareStatement("select * from package order by pkg_id desc limit ?,?");
+			ps.setInt(1, offset);
+			ps.setInt(2, recordsPerPage);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -69,13 +71,15 @@ public class PackageService implements Package_interface {
 		return list;
 	}
 	@Override
-	public List<Package> findAllByCustomerId(int CustId) {
+	public List<Package> findAllByCustomerId(int CustId,int offset,int recordsPerPage) {
 		List<Package> list = new ArrayList<>();
-	    String query ="select * from package where cust_id=?";
+	    String query ="select * from package where cust_id=? order by pkg_id desc limit ?,? ";
 	                   
 	    try (Connection con = JdbcConnection.getConnection();
 	         PreparedStatement ps = con.prepareStatement(query)) {
 	        ps.setInt(1,CustId);
+	        ps.setInt(2,offset);
+	        ps.setInt(3,recordsPerPage);
 	        ResultSet rs = ps.executeQuery();
 	        while (rs.next()) {
 	            Package pkg = new Package();
@@ -98,7 +102,7 @@ public class PackageService implements Package_interface {
 	@Override
 	public List<Package> findAllByAgentId(int agentId) {
 		List<Package> list = new ArrayList<>();
-	    String query ="select * from package where agent_id=?";
+	    String query ="select * from package where agent_id=? ORDER BY FIELD(status, 'IN_TRANSPORT', 'DELIVERED', 'CANCELLED')";
 	                   
 	    try (Connection con = JdbcConnection.getConnection();
 	         PreparedStatement ps = con.prepareStatement(query)) {
@@ -331,6 +335,53 @@ String query ="select agent_mobile from package where agent_id=?";
 			    
 		 }catch (Exception e) { e.printStackTrace(); }
 		 return false;
+	}
+	public int getCountById(int CustId) {
+		String query ="select count(*) from package where cust_id=? ";
+		int count=0;
+		
+	    try (Connection con = JdbcConnection.getConnection();
+	         PreparedStatement ps = con.prepareStatement(query)) {
+	        ps.setInt(1,CustId);
+	        
+	        ResultSet rs = ps.executeQuery();
+	        if(rs.next())
+	        {
+	        	count=rs.getInt(1);
+	        }
+	    } catch (Exception e) { e.printStackTrace(); }
+		return count;
+	}
+	public int getCountByAgentId(int id) {
+		String query ="select count(*) from package where agent_id=? ";
+		int count=0;
+		
+	    try (Connection con = JdbcConnection.getConnection();
+	         PreparedStatement ps = con.prepareStatement(query)) {
+	        ps.setInt(1,id);
+	        
+	        ResultSet rs = ps.executeQuery();
+	        if(rs.next())
+	        {
+	        	count=rs.getInt(1);
+	        }
+	    } catch (Exception e) { e.printStackTrace(); }
+		return count;
+	}
+	public int count() {
+		String query ="select count(*) from package ";
+		int count=0;
+		
+	    try (Connection con = JdbcConnection.getConnection();
+	         PreparedStatement ps = con.prepareStatement(query)) {
+	 
+	        ResultSet rs = ps.executeQuery();
+	        if(rs.next())
+	        {
+	        	count=rs.getInt(1);
+	        }
+	    } catch (Exception e) { e.printStackTrace(); }
+		return count;
 	}	
 
 }

@@ -50,10 +50,12 @@ public class AgentService implements Agent_interface{
 	}
 	
 	@Override
-	public List<Agent_profle> findAll() {
+	public List<Agent_profle> findAll(int offset,int recordsPerPage) {
 		List<Agent_profle> list=new ArrayList<>();
 		try(Connection con=JdbcConnection.getConnection()){
-			PreparedStatement ps=con.prepareStatement("select * from Agent_profile");
+			PreparedStatement ps=con.prepareStatement("select * from Agent_profile limit ?,?");
+			ps.setInt(1, offset);
+			ps.setInt(2, recordsPerPage);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -107,6 +109,20 @@ public class AgentService implements Agent_interface{
 				 }
 		 }catch(Exception e) { e.printStackTrace(); }
 		return "";
+	}
+	public int count() {
+		String query="select count(*) from agent_profile";
+		int count=0;
+		try(Connection con=JdbcConnection.getConnection();
+				PreparedStatement ps=con.prepareStatement(query))
+		{
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{
+				count=rs.getInt(1);
+			}
+		}catch(Exception e) { e.printStackTrace(); }
+		return count;
 	}
 	
 }

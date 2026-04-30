@@ -38,7 +38,7 @@
                     <h4 class="mb-0"><i class="fas fa-box-open me-2"></i> Ship New Package</h4>
                 </div>
                 <div class="card-body p-4">
-                    <form action="AddPackageController" method="post">
+                    <form id="Add" action="AddPackageController" method="post">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <input type="hidden" name="customername" value="<%= session.getAttribute("customerFullName") %>">
@@ -56,11 +56,13 @@
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Distance (km)</label>
                                 <input type="number" id="distance" name="distance" class="form-control" placeholder="e.g. 15" oninput="calculateFee()" required>
+                                <h6 id="distance-span"></h6>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Weight (kg)</label>
                                 <input type="number" id="weight" name="weight" class="form-control" placeholder="e.g. 2" step="0.1" oninput="calculateFee()" required>
                                 <!-- Why you need it here: Since you are dealing with Weight (kg), a package might weigh 1.5kg or 2.2kg. Setting step="0.1" allows the user to enter decimals. -->
+                                <h6 id="weight-span"></h6>
                             </div>
                         </div>
 
@@ -78,6 +80,7 @@
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Reciever Mobile</label>
                                 <input type="text" id="recievermobile" name="recievermobile" class="form-control" placeholder="e.g. 93818-49022" required>
+                                <h6 id="mobile-span"></h6>
                             </div>
                         </div>
                         
@@ -95,7 +98,9 @@
         </div>
     </div>
 </div>
-<%@ include file="includes/footer.jsp" %>    
+<%@ include file="includes/footer.jsp" %>   
+ 
     <script src="${pageContext.request.contextPath}/assets/js/Calculations.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/Addpackage.js"></script>
 </body>
 </html>
