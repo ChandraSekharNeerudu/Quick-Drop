@@ -45,10 +45,12 @@ public class CustomerService implements Customer_interface{
 	}
 
 	@Override
-	public List<Customer_profile> findAll() {
+	public List<Customer_profile> findAll(int offset,int recordsPerPage) {
 		List<Customer_profile> list=new ArrayList<>();
 		try(Connection con=JdbcConnection.getConnection()){
-			PreparedStatement ps=con.prepareStatement("select * from Customer_profile");
+			PreparedStatement ps=con.prepareStatement("select * from Customer_profile limit ?,?");
+			ps.setInt(1, offset);
+			ps.setInt(2, recordsPerPage);;
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -104,6 +106,21 @@ public class CustomerService implements Customer_interface{
 				 }
 		 }catch(Exception e) { e.printStackTrace(); }
 		return "";
+	}
+
+	public int count() {
+		String query="select count(*) from customer_profile";
+		int count=0;
+		try(Connection con=JdbcConnection.getConnection();
+				PreparedStatement ps=con.prepareStatement(query))
+		{
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{
+				count=rs.getInt(1);
+			}
+		}catch(Exception e) { e.printStackTrace(); }
+		return count;
 	}
 
 }

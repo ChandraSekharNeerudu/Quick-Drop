@@ -79,8 +79,8 @@
                                     <td>${pkg.source}</td>
                                     <td>${pkg.destination}</td>
                                     <td>${pkg.reciever}</td>
-                                    <td>${pkg.agentId} </td>
-                                    <td>${pkg.agentMobile}</td>
+                                    <td>${pkg.agentId == 0 ? '-' : pkg.agentId}</td>
+                                    <td>${pkg.agentMobile==null ? '-': pkg.agentMobile}</td>
                                     <td>${pkg.date}</td>
                                     <td>₹${pkg.packageFee}</td>
                                     <td class="text-center">

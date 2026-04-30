@@ -65,10 +65,11 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("agentFullName",agentName ); 
 				int id=agentserv.getIdByUserId(user.getId());
 				session.setAttribute("agentTableId", id); 
+				
 				PackageService pkgService = new PackageService();
 		        List<Package> assignedPackages = pkgService.findAllByAgentId(id);
-				
 		        request.setAttribute("assignedPackages", assignedPackages);
+		      
 				RequestDispatcher rd=request.getRequestDispatcher("Agent_home.jsp");
 				rd.forward(request, response);
 			}

@@ -119,7 +119,32 @@
                 </div>
             </div>
         </div>
-    </div>
+
+     <!--  <div class="row mt-5">
+			<div class="col-md-4 mr-3"></div>
+			<div class="col-md-4 pl-5">
+				<c:set var="currentPage"
+					value="${not empty param.page ? param.page : 1}" />
+				<ul class="pagination">
+					<li class="page-item ${currentPage == 1 ? 'disabled' : ''} ">
+						<a class="page-link"
+						href="LoginController?page=${currentPage - 1}">Previous</a>
+					</li>
+					<li class="page-item">
+					    <a class="page-link"
+						href="LoginController?page=${currentPage}">Page:${currentPage}</a></li>
+					<li 
+					class="page-item ${currentPage >= totalPages ? 'disabled' : ''}">
+						<a class="page-link"
+						href="LoginController?page=${currentPage + 1}">Next
+							Page</a>
+					</li>
+				</ul>
+				</nav>
+			</div>
+		</div>
+		 --> 
+	</div>
     
     
     

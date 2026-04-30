@@ -32,10 +32,24 @@ public class CustomerHistoryController extends HttpServlet {
 			System.out.println("customer Id is null");
 			return ;
 		}
-        List<Package> packageList = pkgService.findAllByCustomerId((Integer)session.getAttribute("customerTableId"));
+		int recordsPerPage = 5;
+		int page =1; // Default to page 1
+		if(request.getParameter("page") != null) {
+		    page = Integer.parseInt(request.getParameter("page"));
+		}
+		int offset = (page - 1) * recordsPerPage;
+        List<Package> packageList = pkgService.findAllByCustomerId((Integer)session.getAttribute("customerTableId"),offset,recordsPerPage);
         
         // 4. Set the list as a Request Attribute
         request.setAttribute("packageList", packageList);
+        
+		// 1. Get the total count of packages for this customer
+		int totalRecords = pkgService.getCountById((Integer) session.getAttribute("customerTableId"));
+		// 2. Calculate total pages (e.g., 13 records / 5 per page = 3 pages)
+		int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+		// 3. Pass this to the JSP
+		request.setAttribute("totalPages", totalPages);
+		
 		RequestDispatcher rd=request.getRequestDispatcher("Customer_history.jsp");
 		rd.forward(request, response);
 	}

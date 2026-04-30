@@ -82,10 +82,12 @@ public class UsersService implements Users_interface {
 		return null;
 	}
 	@Override
-	public List<Users> findAll() {
+	public List<Users> findAll(int offset,int recordsPerPage) {
 		List<Users> list=new ArrayList<>();
 		try(Connection con=JdbcConnection.getConnection()){
-			PreparedStatement ps=con.prepareStatement("select * from users");
+			PreparedStatement ps=con.prepareStatement("select * from users limit ?,?");
+			ps.setInt(1, offset);
+			ps.setInt(2, recordsPerPage);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -145,6 +147,22 @@ public class UsersService implements Users_interface {
 				e.printStackTrace();
 			}
 		return false;
+	}
+	public int count() {
+		String query="select count(*) from Users";
+		int count=0;
+		try(Connection con=JdbcConnection.getConnection();
+				PreparedStatement ps=con.prepareStatement(query) )
+		{
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{
+				count=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 	
 }
